@@ -5,7 +5,7 @@ export default defineConfig({
   build: {
     target: 'es2020',
     chunkSizeWarningLimit: 1000,
-    // Two pages: the game, and the project report that links to it
-    rollupOptions: { input: { main: 'index.html', about: 'about.html' } },
+    // Two pages: the write-up at / and the game at /play/
+    rollupOptions: { input: { main: 'index.html', play: 'play/index.html' } },
   },
 });

@@ -328,9 +328,6 @@ window.addEventListener('keydown', (e) => {
 const clock = new THREE.Clock();
 let smokeTimer = 0;
 const introFrom = new THREE.Vector3(-14, 34, 40);
-let fpsFrames = 0;
-let fpsTime = 0;
-let fpsChecked = false;
 
 let frozen = false;
 
@@ -416,19 +413,6 @@ function frame() {
   rig.update(dt, robotWorld);
   stage.update(dt);
   stage.render();
-
-  // Drop to low quality if this device is struggling
-  if (!fpsChecked && !rig.busy) {
-    fpsFrames++;
-    fpsTime += dt;
-    if (fpsTime > 3) {
-      fpsChecked = true;
-      if (fpsFrames / fpsTime < 38 && stage.quality === 'high') {
-        setQuality('low');
-        log('⚙️ Switched to LQ graphics for smoother frames');
-      }
-    }
-  }
 }
 
 // ---------- boot ----------

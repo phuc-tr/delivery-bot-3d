@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Delivery Bot 3D</title>
+    <meta name="description" content="A self-adaptive MAPE-K delivery robot in a tiny 3D town." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect x='8' y='18' width='48' height='30' rx='10' fill='%2314b8c8'/><rect x='16' y='25' width='32' height='14' rx='5' fill='%23071018'/><rect x='22' y='28' width='6' height='8' rx='3' fill='%235ce8ff'/><rect x='36' y='28' width='6' height='8' rx='3' fill='%235ce8ff'/><circle cx='18' cy='52' r='5' fill='%2322262f'/><circle cx='46' cy='52' r='5' fill='%2322262f'/><path d='M44 18V4l10 4-10 4' fill='%23ff7a1a' stroke='%23ff7a1a'/></svg>" />
+    <style>
+      /* Paint the boot screen before the stylesheet (injected by script) arrives: a plain cream
+         page with every game panel hidden, so raw unstyled HTML never flashes. */
+      html, body { margin: 0; height: 100%; overflow: hidden; background: radial-gradient(circle at 50% 40%, #f7efe4, #e4d6c4); }
+      body.pre > :not(.picker) { visibility: hidden; }
+    </style>
+  </head>
+  <body class="pre">
+    <div id="app"></div>
+
+    <div id="loader"><div class="spinner"></div><span>Building the town…</span></div>
+
+    <aside class="side">
+      <button id="b-collapse" class="collapse-tab" aria-label="Hide side panels" title="Hide side panels" aria-expanded="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+      </button>
+      <section class="panel stats">
+        <div class="chips">
+          <div class="chip"><span>Position</span><b id="s-pos">(1, 1)</b></div>
+          <div class="chip"><span>Cargo</span><b id="s-cargo" class="dots"></b></div>
+          <div class="chip"><span>Pending</span><b id="s-pending">0</b></div>
+        </div>
+        <div class="metrics">
+          <div><b id="m-deliveries">0</b><span>Deliveries</span></div>
+          <div><b id="m-distance">0</b><span>Distance</span></div>
+          <div><b id="m-replans">0</b><span>Replans</span></div>
+          <div><b id="m-avg">0.0s</b><span>Avg time</span></div>
+        </div>
+      </section>
+
+      <section class="panel countdown">
+        <div class="cd-row">
+          <span class="cd-label" id="cd-label">Waiting for orders</span>
+          <b id="cd-time">—</b>
+        </div>
+        <div class="cd-track"><div class="cd-fill" id="cd-fill"></div></div>
+        <span class="cd-sub">Departs at 3 orders or after 30&nbsp;s</span>
+      </section>
+    </aside>
+    <section class="panel log" aria-live="polite">
+      <span class="log-title">Event log</span>
+      <ol id="log"></ol>
+    </section>
+
+    <div class="hint" id="hint">
+      <span><i class="key">Click</i> a house to order</span>
+      <span><i class="key">Click</i> a tile to block or unblock it</span>
+      <span><i class="key">Drag</i> orbit · <i class="key">Middle-drag</i> pan · <i class="key">Scroll</i> zoom</span>
+      <span><i class="key">WASD</i> move · <i class="key">Q</i><i class="key">E</i> turn · <i class="key">H</i> recentre · <i class="key">C</i> courier</span>
+    </div>
+
+    <nav class="panel dock">
+      <button id="b-pause" title="Pause (Space)"></button>
+      <div class="speed" role="group" aria-label="Simulation speed">
+        <button data-speed="0.5">½×</button><button data-speed="1">1×</button><button data-speed="2">2×</button><button data-speed="4">4×</button>
+      </div>
+      <span class="sep"></span>
+      <button id="b-carrier"></button>
+      <button id="b-follow" title="Follow cam (F)"></button>
+      <button id="b-sound" title="Sound"></button>
+      <button id="b-quality" title="Graphics quality"></button>
+      <span class="sep"></span>
+      <button id="b-reset" class="danger" title="Reset (R)"></button>
+    </nav>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

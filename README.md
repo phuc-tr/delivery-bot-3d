@@ -12,7 +12,7 @@ See [`BRIEF.md`](BRIEF.md) for the full design brief.
 
 ```bash
 npm install
-npm run dev       # http://localhost:5173
+npm run dev       # http://localhost:5173 (write-up) · /play/ (the game)
 npm run build     # static site in dist/ — host anywhere
 ```
 
